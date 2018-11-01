@@ -1,7 +1,7 @@
 <html>
 <head>
   <base href="/">
-  <title>Watson Assistant Simple App</title>
+  <title>IT Support Assistant - Powered by Watson</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta property="og:image" content="conversation.svg" />
@@ -22,7 +22,7 @@
         <div id="scrollingChat"></div>
         <p class="user-typing" id="user-typing-field"></p>
         <label for="textInput" class="inputOutline">
-          <input id="textInput" class="input responsive-column" placeholder="Type something" type="text" onkeydown="ConversationPanel.inputKeyDown(event, this)"
+          <input id="textInput" class="input responsive-column" placeholder="What help do you need?" type="text" onkeydown="ConversationPanel.inputKeyDown(event, this)"
             autofocus>
         </label>
         <!--
@@ -36,6 +36,7 @@
         -->
       </div>
     </div>
+
     <div id="payload-column" class="fixed-column content-column">
       <div id="payload-initial-message">
         Type something to see the output
