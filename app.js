@@ -39,15 +39,35 @@ var assistant = new AssistantV1({
 });
 
 var nextMonth = ((new Date().getMonth() + 1) % 12) + 1;
-var accountData = {
-  acc_minamt: 50,
-  acc_currbal: 430,
-  acc_paydue: '2018-' + nextMonth + '-26 12:00:00',
-  accnames: [
-    5624,
-    5893,
-    9225,
+
+// This is where the end user context is set / injected.
+// Ideally the context values would come from an application
+// where the user information is maintained.
+var userProfileContextData = {
+  avatarName: "Sam",
+  channel: "web",
+  userId: "swamchan",
+  firstName: "Swami",
+  lastName: "Chandrassekaran",
+  //email: "swami@someorg.com",
+  phone: "+1 972-123-4567",
+  timezone: "-6", // with respect to GMT
+  homeCity: "Dallas",
+  homeState: "TX",
+  office: "123 Spooner Street",
+  ibm_function_credentials: "{'api_key':'username:password'}", // IBM Functions service instance API key
+  openRequests: 1,
+  org: {
+    groupId: 156,
+    orgId: "US-642"
+    //departmentName: "IT",
+  },
+  previousInteractions: [
+      {dateOfInteraction: "10/21/2018", intents: ['Submit_Service_Request', 'Handle_ChitChat']},
+      {dateOfInteraction: "10/15/2018", intents: ['Reset_Password', 'Handle_ChitChat']},
   ],
+  //enagagement_tone_counter: 0,
+  enagagement_tone_array: [],
   private: {
     function_creds: {
       user: process.env.CLOUD_FUNCTION_USER,
@@ -67,7 +87,9 @@ app.post('/api/message', function (req, res) {
     });
   }
 
-  var contextWithAcc = Object.assign({}, req.body.context, accountData);
+  // Fetch context. Ideally the context values would come from an application
+  // where the user information is maintained.
+  var contextWithAcc = Object.assign({}, req.body.context, userProfileContextData);
 
   var payload = {
     workspace_id: workspace,
